@@ -2,75 +2,47 @@ package com.program;
 
 public class BinarySearchTree {
 
-	    /*
-	     * Class containing left and right child of current
-	     *  node and key value
-	     */
-	    class Node {
-	        int key;
-	        Node left;
-	        Node right;
+	 class Node {
+	       int data;
+	       Node left;
+	       Node right;
+	 
+	       Node(int data) {
+	           this.data = data;
+	           this.left = null;
+	           this.right = null;
+	       }
+	   }		 
 
-	        public Node(int item) {
-	            key = item;
-	            left = right = null;
-	        }
+	        int idx = -1;
+	       public  Node buildTree(int nodes[]) {
+	           idx++;
+	           if(nodes[idx] == -1) {
+	               return null;
+	           }
+	           Node newNode = new Node(nodes[idx]); 
+	           newNode.left = buildTree(nodes);
+	           newNode.right = buildTree(nodes);
+	           return newNode;
+	       }  
+	 public void preorder(Node root) {
+	    if(root == null) {
+	        System.out.print(-1+" ");
+	        return;
 	    }
+	    System.out.print(root.data+" ");
+	    preorder(root.left);
+	    preorder(root.right);
+	 }
+	   
+	   public static void main(String args[]) {
+	       int nodes[] = {56, 30,22,11,3,-1,-1,16,-1,-1,-1,40,-1,
+	    		   -1,70,60,-1,65,62,-1,-1,67,-1,-1,95,-1,-1};
+	       BinarySearchTree tree = new BinarySearchTree();  
+	       Node root = tree.buildTree(nodes);
+	       tree.preorder(root);
+	       System.out.println("  ");
+	       System.out.println("The Value Of  "+-1 +" ------> Will Indicate Null");
+	   }
+}
 
-	    // Root of BST
-	    Node root;
-
-	    // Constructor
-	    BinarySearchTree() {
-	        root = null;
-	    }
-
-	    // This method mainly calls insertRec()
-	    public void insert(int key) {
-	        root = insertRec(root, key);
-	    }
-
-	    /*
-	     * A recursive function to insert a new key in BST
-	     */
-	    Node insertRec(Node root, int key)
-	    {
-
-	        /*
-	         * If the tree is empty, return a new node
-	         */
-	        if (root == null)
-	        {
-	            root = new Node(key);
-	            return root;
-	        }
-
-	        /* Otherwise, recur down the tree */
-	        if (key < root.key)
-	            root.left = insertRec(root.left, key);
-	        else if (key > root.key)
-	            root.right = insertRec(root.right, key);
-
-	        return root;
-	    }
-	    public void preorder(Node root) {
-		    if(root == null) {
-		        System.out.print(-1+" ");
-		        return;
-		    }
-		    System.out.print(root.key+" ");
-		    preorder(root.left);
-		    preorder(root.right);
-		 }
-	  
-
-	    public static void main(String[] args) {
-	        BinarySearchTree tree = new BinarySearchTree();
-	       
-	        tree.insert(56);
-	        tree.insert(30);
-	        tree.insert(70);
-            tree.preorder(tree.root);
-
-	    }
-	}
