@@ -5,35 +5,34 @@ import java.util.Set;
 
 public class HashTable {
 
-	public static void frequencyWord(String inputString)  {
-		inputString=inputString.toLowerCase();
-		HashMap<String,Integer> wordCount = new HashMap<String,Integer>();
-		String[] words = inputString.split(" ");
-		for (String word : words) {
-			if (wordCount.containsKey(word)) {
-				wordCount.put(word, wordCount.get(word)+1);
+	public static void remove(String str, String word)  {
+		// split the string using split() method
+		String msg[] = str.split(" ");
+		String new_str = " ";
+		//  Iterating the string using for each loop
+		for (String words : msg)  {
+			// If desired word is found
+			if (!words.equals(word)) {
+				
+				// concat the word not equal to the given
+				// word
+				new_str += words + " ";
 			}
-			else {
-				wordCount.put(word, 1);
-			}
-			
 		}
-		//Extracting of all keys of word count
-		Set<String> wordInString =wordCount.keySet();
-		System.out.println("Ability to find frequency of words in a large\r\n"
-				+ "paragraph phrase");
-		for (String word : wordInString)  {
-			if (wordCount.get(word)>1) {     // more than 1 counting
-		//	System.out.println((word +"  :  "+wordCount.get(word)));
-			}
-			System.out.println((word +"  :  "+wordCount.get(word)));
-		}	
+		// print the new String
+		System.out.println(new_str);
 	}
-	public static void main(String [] args) {
-		frequencyWord("Paranoids are not paranoid because they are "
-				+ "paranoid but because they keep putting themselves "
-				+ "deliberately into paranoid avoidable situations");
+	// method 2
+	// main driver method
+	public static void main(String[] args)  {
+		// custom string as input
+		String str = "Paranoids are not paranoid because they are paranoid but because they keep putting themselves deliberately into paranoid avoidable situations  ";
 		
+		// word to be removed from above string 
+		String word = "avoidable";
+		
+		// calling the method 1 by passing both strings to it
+		remove(str,word);
 	}
-
+	
 }
