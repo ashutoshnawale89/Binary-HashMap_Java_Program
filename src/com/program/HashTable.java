@@ -1,6 +1,7 @@
 package com.program;
 
 import java.util.HashMap;
+import java.util.Set;
 
 public class HashTable {
 
@@ -8,21 +9,31 @@ public class HashTable {
 		inputString=inputString.toLowerCase();
 		HashMap<String,Integer> wordCount = new HashMap<String,Integer>();
 		String[] words = inputString.split(" ");
-
-		for (int i=0; i< words.length;i++) {
-			if (wordCount.containsKey(words[i]))  {  //  this line is repeatation of word is detect
-				int count=wordCount.get(words[i]);  // no. of count words
-				wordCount.put(words[i],count +1);   // it will add the word number like 1 to upgrade in 2
+		for (String word : words) {
+			if (wordCount.containsKey(word)) {
+				wordCount.put(word, wordCount.get(word)+1);
 			}
-			else  {
-				wordCount.put(words[i], 1);  // add the word in number
+			else {
+				wordCount.put(word, 1);
 			}
+			
 		}
-		System.out.println(wordCount);
-	}	 
-
-	public static void main(String [] args) {
-		System.out.println("Welcome To HashMap & Binary Tree Program");
-		frequencyWord("To be or not to be ");
+		//Extracting of all keys of word count
+		Set<String> wordInString =wordCount.keySet();
+		System.out.println("Ability to find frequency of words in a large\r\n"
+				+ "paragraph phrase");
+		for (String word : wordInString)  {
+			if (wordCount.get(word)>1) {     // more than 1 counting
+		//	System.out.println((word +"  :  "+wordCount.get(word)));
+			}
+			System.out.println((word +"  :  "+wordCount.get(word)));
+		}	
 	}
+	public static void main(String [] args) {
+		frequencyWord("Paranoids are not paranoid because they are "
+				+ "paranoid but because they keep putting themselves "
+				+ "deliberately into paranoid avoidable situations");
+		
+	}
+
 }
